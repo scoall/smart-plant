@@ -15,11 +15,11 @@ WiFiClient client;
 MySQL_Connection conn((Client *)&client);
 
   
-IPAddress server_addr(1,1,1,1);          // MySQL server IP,
-char user[] = "sql1605057";           // MySQL user
-char sqlpassword[] = "WgeCm0Kqn0Gb";
+IPAddress server_addr(18,188,120,255);          // MySQL server IP,
+char user[] = "nader";           // MySQL user
+char sqlpassword[] = "arduinoproject";
 
-char INSERT_SQL[] = "INSERT INTO plant VALUES numberooni = 1";
+char INSERT_SQL[] = "USE DDNS_DB; INSERT INTO plant VALUES (1);";
 char query[128];
  
 
@@ -60,7 +60,7 @@ void setup() {
 
   
   while (conn.connect(server_addr, 3306, user, sqlpassword) != true) {
-      Serial.print ( "sql connect" );
+      Serial.print ( " sql connect failed " );
   }
  
 }
@@ -96,8 +96,21 @@ void loop() {
   if (request.indexOf("/LED=OFF") != -1){
     digitalWrite(LED_BUILTIN, HIGH); 
     value = LOW;
+    
+    //float t = dht.readTemperature();
+  
+    //Serial.println(t);
+    
+    sprintf(query, INSERT_SQL);
+    //sprintf(query, INSERT_SQL, soil_hum, t);
+  
+    Serial.println("Recording data.");
+    Serial.println(query);
+    
+    MySQL_Cursor *cur_mem = new MySQL_Cursor(&conn);
+    
+    cur_mem->execute(query);
     client.print("<p>BYE GUYS</p>");
-    client.print("<script>alert(""HELLO ALERT"")</script>");
   }
   
  

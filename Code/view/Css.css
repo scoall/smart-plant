@@ -151,7 +151,15 @@ h5
     
 }
 */
+.navbar .navbar-nav {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
 
+.navbar .navbar-collapse {
+  text-align: center;
+}
 .navbar>.container>.row>.col-lg-8>.nav>li>a:hover
 {
    background-color: white;

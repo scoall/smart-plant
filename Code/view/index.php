@@ -39,7 +39,23 @@ session_start();
 
 
 
+                $('.toggle-register').click(function(){
+                    $(this).addClass('active');
+                    $('.toggle-login').removeClass('active');
+                    $('.login-body').slideUp("slow");
+                    $('.register-body').delay(625).slideDown("slow");
+                });
 
+                $('.toggle-login').click(function(){
+                    $(this).addClass('active');
+                    $('.toggle-register').removeClass('active');
+                    $('.register-body').slideUp("slow");
+                    $('.login-body').delay(625).slideDown("slow");
+                });
+
+                $('#registered').click(function(){
+                    $('.toggle-login').click();
+                });    
 
 
 
@@ -65,67 +81,115 @@ session_start();
             </nav>
 
         </div>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="new">
-                    <div class="col-lg-2"></div>
-                    <div class="col-lg-8">
-
-                        <p class="intro1" align="center">At Abertay Plant System we aim to supply you with the tools <br> for keeping your homes and gardens fresh and green. </p>
-                        <p class="intro2" align="center">Get ready for a whole range of smart devices <br> that make monitoring your plants as easy as pie.</p>
-                        <p class="intro3" align="center">New to gardening? Don’t worry! <br> We’ll help you colour your thumbs green in no time.</p>
-                    </div><div class="col-lg-2">
-
-                    <div class="social-container">
-                        <ul class="social-icons">
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li><br>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li><br>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li><br>
-                            <li><a href="#"><i class="fa fa-snapchat"></i></a></li><br>
-                        </ul>
-                        <!--
-<ul class="social-icons">
-<li><a href="#" class="social-square"><i class="fa fa-facebook"></i></a></li>
-<li><a href="#" class="social-square"><i class="fa fa-dribbble"></i></a></li>
-<li><a href="#" class="social-square"><i class="fa fa-github"></i></a></li>
-<li><a href="#" class="social-square"><i class="fa fa-stack-overflow"></i></a></li>
-</ul>-->
+                    <div class="col-lg-2">                      
                     </div>
+                    <div class="col-lg-8"  align="center" style="text-align:center;">
+                        <p class="intro1" style="text-align:center;">At Abertay Plant System we aim to supply you with the tools<br> for keeping your homes and gardens fresh and green. </p>
+                        <p class="intro2" style="text-align:center;">Get ready for a whole range of smart devices <br> that make monitoring your plants as easy as pie.</p>
+                        <p class="intro3" style="text-align:center;" >New to gardening? Don’t worry! <br> We’ll help you colour your thumbs green in no time.</p>
+                    </div>
+                    <div class="col-lg-2">
+
+                        <div class="social-container">
+                            <button type="button" style="background-color:transparent" data-toggle="modal" data-target="#myModal"><img src="images/male.png" style="height:50px;width:50px"></button><br><p class="loginnote">Login/Sign up</p>
+
+
+
+                            <ul class="social-icons">
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li><br>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li><br>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li><br>
+                                <li><a href="#"><i class="fa fa-snapchat"></i></a></li><br>
+                            </ul>
+                        </div>
 
 
                     </div>
 
                 </div>        
 
-            </div>
+            </div>  </div>
 
-            <div class="container">
-                <div class="row new2">
-                    <div class="col-lg-2"></div>
-                    <div class="col-lg-1" align="center"><img src="images/leftarrow.png" alt="Avatar"  class="arrow" style="height:50px"></div>
 
-                    <div class="col-lg-6 center-block" id="izaismakingtrouble" align="center">
 
-                        <div class="container" align="center">
-                            <div class="row new2" align="center" id="here" >
-                                <div class="image-cropper col-lg-2"><img src="images/flower1.png" alt="Avatar" class="profile-pic" style="height:130px"></div>
-                                <div class="image-cropper col-lg-2"><img src="images/flower2.png" alt="Avatar" class="profile-pic" style="height:130px"></div>
-                                <div class="image-cropper col-lg-2"><img src="images/flower3.png" alt="Avatar" class="profile-pic" style="height:170px"></div>
-                                <div class="image-cropper col-lg-2"><img src="images/flower4.png" alt="Avatar" class="profile-pic" style="height:130px"></div>   
-                                <div class="image-cropper col-lg-2"><img src="images/flower5.png" alt="Avatar" class="profile-pic" style="height:130px"></div> 
-                            </div>
-                        </div>
+        <div class="container">
+            <div class="row new2">
+                <div class="col-lg-2" style=""></div>
+                <div class="col-lg-1" style="" align="center"> <img src="images/leftarrow.png" alt="Avatar"  class="arrow" style="height:50px"></div>
+
+                <div class="col-lg-6 center-block" style="margin-left:0;padding-left:0" id="izaismakingtrouble" align="center">
+                    <div class="row new2" align="center" style="" id="here" >
+
+                        <div class="image-cropper col-lg-2"><img src="images/flower1.png" alt="Avatar" class="profile-pic" style="height:130px"></div>
+                        <div class="image-cropper col-lg-2"><img src="images/flower2.png" alt="Avatar" class="profile-pic" style="height:130px"></div>
+                        <div class="image-cropper col-lg-2"><img src="images/flower3.png" alt="Avatar" class="profile-pic" style="height:170px"></div>
+                        <div class="image-cropper col-lg-2"><img src="images/flower4.png" alt="Avatar" class="profile-pic" style="height:130px"></div>   
+                        <div class="image-cropper col-lg-2"><img src="images/flower5.png" alt="Avatar" class="profile-pic" style="height:130px"></div> 
                     </div>
+                </div>
 
-                    <div class="col-lg-1" align="center"><img src="images/rightarrow.png" alt="Avatar" class="arrow"  style="height:50px"></div>
-                    <div class="col-lg-2"></div>
+                <div class="col-lg-1" style="" align="center"><img src="images/rightarrow.png" alt="Avatar" class="arrow"  style="height:50px"></div>
+                <div class="col-lg-2" style="">
+
+
+                </div>
 
 
 
 
+            </div></div>
+
+
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet"> 
+                    <div class="wrap">
+                        <form class="login">
+                            <div class="toggle-bar">
+                                <div class="toggle-login active">
+                                    <span>Login</span>
+                                </div>
+                                <div class="toggle-register">
+                                    <span>Register</span>
+                                </div>
+                            </div>
+                            <div class="login-body">
+                                <div class="input-section">
+                                    <i class="fas fa-user"></i>
+                                    <input class="user-input" type="text" placeholder="Username">
+                                </div>
+                                <div class="input-section">
+                                    <i class="fas fa-lock"></i>
+                                    <input class="user-input" type="password" placeholder="Password">
+                                </div>
+                                <p id="forgot-password">Forgot your password?</p>
+                                <button class="btn" id="btn-login">Login</button>
+                            </div>
+                            <div class="register-body" style="display:none;">
+                                <div class="input-section">
+                                    <i class="fas fa-user"></i>
+                                    <input class="user-input" type="text" placeholder="Username">
+                                </div>
+                                <div class="input-section">
+                                    <i class="fas fa-envelope"></i>
+                                    <input class="user-input" type="email" placeholder="Email">
+                                </div>
+                                <div class="input-section">
+                                    <i class="fas fa-lock"></i>
+                                    <input class="user-input" type="password" placeholder="Password">
+                                </div>
+                                <p id="registered">Already registered?</p>
+                                <button class="btn" id="btn-login">Register</button>
+                            </div>
+                        </form>  
+                    </div>
                 </div></div>
-
-
         </div>
 
 

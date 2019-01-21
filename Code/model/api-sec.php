@@ -9,7 +9,7 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 
 
-function register($fname, $sname,$email,$password,$mobile){
+function register($fname,$sname,$username,$email,$password){
     $pwdhash = password_hash($password, PASSWORD_DEFAULT);
     global $conn;
     $stmt = mysqli_stmt_init($conn);
@@ -19,25 +19,25 @@ function register($fname, $sname,$email,$password,$mobile){
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     if(mysqli_num_rows($result)>0){
-        echo "<script>alert('Eamil already registered');window.location.href = '../View/register.php';</script>";
+        echo "<script>alert('Email already registered');window.location.href = '../view/index.php';</script>";
     }
     else {
-        $sql = "SELECT * FROM 3users WHERE u_mobile = ?" ;
+        $sql = "SELECT * FROM plant_users WHERE username = ?" ;
         mysqli_stmt_prepare($stmt, $sql);
-        mysqli_stmt_bind_param($stmt,'s', $mobile);
+        mysqli_stmt_bind_param($stmt,'s', $username);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         if(mysqli_num_rows($result)>0){
-            echo "<script>alert('Mobile already registered');window.location.href = '../View/register.php';</script>";
+            echo "<script>alert('Mobile already registered');window.location.href = '../view/index.php';</script>";
         }
         else{
             $stmt = mysqli_stmt_init($conn);
-            $sql = "INSERT INTO 3users(u_firstname, u_surname, u_email, u_password, u_mobile) VALUES (?,?,?,?,?)" ;
+            $sql = "INSERT INTO plant_users(name, surname, email, password, username) VALUES (?,?,?,?,?)" ;
             mysqli_stmt_prepare($stmt, $sql);
-            mysqli_stmt_bind_param($stmt, 'sssss', $fname, $sname,$email,$pwdhash,$mobile);
+            mysqli_stmt_bind_param($stmt, 'sssss', $fname, $sname,$email,$pwdhash,$username);
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
-            echo "<script>alert('Successfully registered');window.location.href = '../View/index.php';</script>";
+            echo "<script>alert('Successfully registered');window.location.href = '../view/index.php';</script>";
         }
     }
     return json_encode($result);

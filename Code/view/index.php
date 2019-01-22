@@ -130,21 +130,24 @@ session_start();
                         <div class="social-container">
                             <!--<button type="button" style="background-color:transparent" data-toggle="modal" data-target="#myModal"><img src="images/user.png" style="height:50px;width:50px"></button> -->
                             <ul class="social-icons">
-                                <li><a href="#" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-user-o"></i></a></li><br>
+                                <?php 
+                                if(!isset($_SESSION['username'])){
+                                    echo '<li><a href="#" type="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-user-o"></i></a></li><br>';
+                                }         
+                                else{
+                                    echo '';
+                                }
+                                ?>
                                 <li><a href="#"><i class="fa fa-instagram"></i></a></li><br/>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li><br/>
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li><br/>
                                 <li><a href="#"><i class="fa fa-snapchat"></i></a></li><br/>
                             </ul>
-
                         </div>
-
-
                     </div>
-
-                </div>        
-
-            </div>  </div>
+                </div>   
+            </div>  
+        </div>
 
         <!--
 
@@ -191,18 +194,27 @@ session_start();
                                 </div>
                             </div>
                             <div class="login-body">
-                                <form>
+                                <form action="" method="post">
                                     <div class="input-section">
 
-                                        <input class="user-input" type="text" placeholder="Username">
+                                        <input class="user-input" type="text" name="userlog" placeholder="Username">
                                     </div>
                                     <div class="input-section">
 
-                                        <input class="user-input" type="password" placeholder="Password">
+                                        <input class="user-input" type="password" name="passlog" placeholder="Password">
                                     </div><br>
                                     <p id="forgot-password">Forgot your password?</p>
-                                    <button class="btn" id="btn-login">Login</button>
+                                    <button class="btn" type="submit" name="sublog" id="btn-login">Login</button>
                                 </form>
+                                <?php 
+                                if(isset($_POST['sublog'])){
+                                    ini_set('display_errors', 'On');
+                                    error_reporting(E_ALL);
+                                    include("../model/api-sec.php");
+                                    $articletxt = login($_POST['userlog'], $_POST['passlog']);
+                                    $articlejson = json_decode($articletxt) ;
+                                }
+                                ?>
                             </div>
                             <div class="register-body" style="display:none;">
                                 <form action="../model/register.php" method="post">

@@ -44,28 +44,30 @@ function register($fname,$sname,$username,$email,$password){
 
 }
 
-function login($lgnuser, $lgnpassword){
+function login($lgnemail, $lgnpassword){
     $_SESSION["tlog"]=false;
     global $conn;
     $stmt = mysqli_stmt_init($conn);
-    $sql = "SELECT surname, name, password FROM plant_users WHERE username = ?" ;
+    $sql = "SELECT u_firstname, u_email, u_password FROM 3users WHERE u_email = ?" ;
     mysqli_stmt_prepare($stmt, $sql);
-    mysqli_stmt_bind_param($stmt,'s', $lgnuser);
+    mysqli_stmt_bind_param($stmt,'s', $lgnemail);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     if(mysqli_num_rows($result)>0){ 
         $r = mysqli_fetch_assoc($result);
-        if(password_verify($lgnpassword, $r['password'])) {
-            $_SESSION["name"] = $r['name'];
-            $_SESSION["surname"] = $r['surname'];
-            $_SESSION["username"] = $lgnuser;
+        if(password_verify($lgnpassword, $r['u_password'])) {
+            $_SESSION["name"] = $r['u_firstname'];
+            $_SESSION["useremail"] = $r['u_email'];
             echo "<script>window.location.href = '../View/index.php';</script>";
+            $_SESSION["tlog"]=false;
         }
         else{
             echo "<script>alert('Wrong login details');window.location.href = '../View/index.php';</script>";
+            $_SESSION["tlog"]=true;
         }
     }
     else{
         echo "<script>alert('Wrong login details');window.location.href = '../View/index.php';</script>";
+        $_SESSION["tlog"]=true;
     }
 }

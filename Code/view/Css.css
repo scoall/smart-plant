@@ -174,6 +174,104 @@ https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.xoedge.com%2Fxo-guest-se
   margin-top:0 !important;
 }
 
+#background4
+{
+  background-image: url('https://images.pexels.com/photos/273238/pexels-photo-273238.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+  position: absolute;
+  width: 102%;
+  z-index:-1;
+  height:102%;
+   
+  background-size: cover;
+  transition: all linear;
+  margin-top:0 !important;
+}
+
+
+
+#background6
+{
+  background-image: url('https://images.pexels.com/photos/6386/person-woman-hand-smartphone.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+  position: absolute;
+  width: 102%;
+  z-index:-2;
+  height:102%;
+   
+  background-size: cover;
+  transition: all linear;
+  margin-top:0 !important;
+}
+
+#menu2
+{
+    position:absolute;
+    bottom:0 !important;
+    width:100%;
+    height:100%;
+    left: 0;
+    overflow:hidden;
+    z-index: -1;
+   
+
+}
+
+
+#trapeze 
+{
+    position:relative;
+    width:100em;
+    height:100em;
+    overflow:hidden;
+   
+
+}
+
+.aboutus 
+{
+    position:absolute;
+    top:6em;
+    z-index:2;
+    color:white;
+    font-family: 'Dosis', sans-serif;
+    font-weight: 100;
+    font-size: 15px !important;
+    text-shadow: 2px 2px 4px black;
+}
+
+.trapeze {
+    position:absolute;
+    top:0;
+    bottom:30px;
+    -webkit-transform: skew(-20deg);
+    -moz-transform: skew(-20deg);
+    -o-transform: skew(-20deg);
+}
+.trapeze * 
+{
+    -webkit-transform: skew(20deg);
+    -moz-transform: skew(20deg);
+    -o-transform: skew(20deg);
+}
+.trapeze:nth-child(1) 
+{
+    background:black;
+    left:30.5%;right:0%;
+    opacity:0.6;
+}
+
+
+.trapezeleft {
+    position:absolute;
+    top:0;
+    bottom:30px;
+    -webkit-transform: skew(20deg);
+    -moz-transform: skew(20deg);
+    -o-transform: skew(20deg);
+
+    background:red;
+    left:-10.5%;right:50.5%;
+    opacity:0.5;
+}
 
 
 .loginnote
@@ -266,7 +364,7 @@ button
 }
 .nav
 {top: 35px !important;}
-p, h2
+p
 {
 
     font-family: 'Caveat', bold;
@@ -382,6 +480,18 @@ box-shadow: 5px 0px 8px black;
 img
 {
     z-index: 1;
+
+}
+
+.menu2
+{
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: black;
+    text-shadow: none;
+    margin-top:5em;
+    letter-spacing: 1.5;
+    font-size: 20px !important;
+    
 
 }
 

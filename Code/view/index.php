@@ -96,36 +96,36 @@ session_start();
         <div class="menu">
             <nav class="navbar navbar-inner">
                 <div class="container text-center">
-                    <div class="row new2"><div class="col-lg-2"></div><div class="col-lg-8">
-
-                        <ul class="nav navbar-nav">
-
-                            <li><a href="">START</a></li>
-                            <li><a href="">ABOUT SMART ECO SYSTEM</a></li>
-                            <li><a href="">HOW IT WORKS</a></li>
-                            <li><a href="">ABOUT US</a></li>
-                            <li><a href="">CONTACT</a></li>
-
-
-                        </ul>
-                        </div><div class="col-lg-2">
-
-
-                        </div></div></div>
+                    <div class="row new2">
+                        <div class="col-lg-2">
+                        </div>
+                        <div class="col-lg-8">
+                            <ul class="nav navbar-nav">
+                                <li><a href="">START</a></li>
+                                <li><a href="">ABOUT SMART ECO SYSTEM</a></li>
+                                <li><a href="">HOW IT WORKS</a></li>
+                                <li><a href="aboutus.php">ABOUT US</a></li>
+                                <li><a href="contact.php">CONTACT</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-2">
+                        </div>
+                    </div>
+                </div>
             </nav>
 
         </div>
         <div class="container-fluid">
             <div class="row">
                 <div class="new">
-                    <div class="col-lg-2">                      
+                    <div class="col-xs-2">                      
                     </div>
-                    <div class="col-lg-8"  align="center" >
+                    <div class="col-xs-8"  align="center" >
                         <p class="intro1" >At Abertay Plant System we aim to supply you with the tools<br> for keeping your homes and gardens fresh and green. </p>
                         <p class="intro2" >Get ready for a whole range of smart devices <br> that make monitoring your plants as easy as pie.</p>
                         <p class="intro3"  >New to gardening? Don’t worry! <br> We’ll help you colour your thumbs green in no time.</p>
                     </div>
-                    <div class="col-lg-2" id="tempid" style="">
+                    <div class="col-xs-2" id="tempid" style="">
 
                         <div class="social-container">
                             <!--<button type="button" style="background-color:transparent" data-toggle="modal" data-target="#myModal"><img src="images/user.png" style="height:50px;width:50px"></button> -->

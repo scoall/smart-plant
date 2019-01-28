@@ -1,6 +1,6 @@
  #include <SoftwareSerial.h>
  
- SoftwareSerial mySerial(7, 8); // RX, TX
+ SoftwareSerial mySerial(D1, D2); // RX, TX
  
 
 void setup() {
@@ -10,10 +10,7 @@ void setup() {
 }
 
 void loop() {
-  int sensorValue = analogRead(A0);
-  if (sensorValue!=analogRead(A0)){
-  Serial.println(sensorValue);
-  }
+  
   mySerial.println();
   if (mySerial.available()) {
     Serial.write(mySerial.read());

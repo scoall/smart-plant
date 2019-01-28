@@ -12,7 +12,7 @@ void loop() { // run over and over
   delay(1000);
   digitalWrite(LED_BUILTIN, LOW); 
   delay(1000);
-  Serial.write("THIS IS THE WEMOS");
+  Serial.write("THIS IS THE UNO");
   digitalWrite(LED_BUILTIN, HIGH); 
   delay(1000);
 }

@@ -1,12 +1,12 @@
  #include <SoftwareSerial.h>
  
- SoftwareSerial mySerial(D1, D2); // RX, TX
+ SoftwareSerial mySerial(D3, D4); // RX, TX
  
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   while (!Serial) { ; }
-  mySerial.begin(115200);
+  mySerial.begin(9600);
 }
 
 void loop() {

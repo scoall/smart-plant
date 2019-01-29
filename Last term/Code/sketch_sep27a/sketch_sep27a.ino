@@ -1,7 +1,7 @@
 
 void setup() {
   // Open serial communications and wait for port to open:
-  Serial.begin(115200);
+  Serial.begin(9600);
   Serial.println("Goodnight moon!");
   pinMode(LED_BUILTIN, OUTPUT); 
 
@@ -10,9 +10,6 @@ void setup() {
 void loop() { // run over and over
   
   delay(1000);
-  digitalWrite(LED_BUILTIN, LOW); 
-  delay(1000);
-  Serial.write("THIS IS THE UNO");
-  digitalWrite(LED_BUILTIN, HIGH); 
+  Serial.write("This is the uno ");
   delay(1000);
 }

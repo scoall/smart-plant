@@ -4,9 +4,9 @@
  
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   while (!Serial) { ; }
-  mySerial.begin(9600);
+  mySerial.begin(115200);
 }
 
 void loop() {

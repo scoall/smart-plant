@@ -10,10 +10,10 @@ void setup() {
 }
 
 void loop() {
-  
   mySerial.println();
   if (mySerial.available()) {
     Serial.write(mySerial.read());
+    Serial.println("HELLO");
   }
   if (Serial.available()) {
     mySerial.write(Serial.read());

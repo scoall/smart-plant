@@ -10,17 +10,36 @@ An activated SIM card must be inserted into the SIM card holder on the board in 
 
 */
 #include <ESP8266WiFi.h>
+#include <ESP8266mDNS.h>
+#include <WiFiUdp.h>
+#include <WiFiUdp.h>
+#include <WiFiClient.h>
 #include <SoftwareSerial.h>  //Include the NewSoftSerial library to send serial commands to the cellular module.
 #include <string.h>         //Used for string manipulations
 #include <ArduinoJson.h>
 
+
+#include <MySQL_Connection.h>
+#include <MySQL_Cursor.h>
+
+const char* ssid     = "AndroidAP";
+const char* password = "nader123";                //!!!!!!!!!!!!!!!!!!!!!modify this
+
+WiFiClient client;
+MySQL_Connection conn((Client *)&client);
+
+IPAddress server_addr(35,178,39,124);          // MySQL server IP,
+char user[] = "nader";           // MySQL user
+char sqlpassword[] = "arduinoproject";
+
+WiFiServer server(80);
+
 char incoming_char = 0;      //Will hold the incoming character from the Serial Port.
 //StaticJsonDocument<1024> jsonBuffer;
-DynamicJsonDocument jsonBuffer(1024);
+DynamicJsonDocument jsonBuffer(2048);
 SoftwareSerial cell(D2,D3);  //Create a 'fake' serial port. Pin 2 is the Rx pin, pin 3 is the Tx pin.
 bool moisture, humidity, light, temp = false;
 char m='X'; char h='X'; char l='X'; char t='X';
-char mvalue[6]={0}; char hvalue[6]={0}; char lvalue[6]={0}; char tvalue[6]={0};
 int mvalue1=0; int hvalue1=0; int lvalue1=0; int tvalue1=0;
 String mresult="";String lresult="";String tresult="";String hresult="";
 int count = 0;
@@ -33,6 +52,16 @@ void setup()
   Serial.print(WiFi.macAddress());
   //Let's get started!
   Serial.println(" Starting SM5100B Communication...");
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.println("No connect ");
+  }
+  server.begin();
+  while (conn.connect(server_addr, 3306, user, sqlpassword) != true) {
+      Serial.print ( " sql connect failed " );
+  }
 }
 
 
@@ -94,9 +123,7 @@ void loop() {
     }
     
     else{    
-      value = value+incoming_char;
-      
-      //Serial.print(value);       
+      value = value+incoming_char;       
       if (moisture==true){
         mresult=mresult+value;
         mvalue1=mvalue1+1;
@@ -116,13 +143,23 @@ void loop() {
     }
     if (mvalue1>=6 && tvalue1>=6 && lvalue1>=6 && hvalue1>=6){
     
-
+        if (mresult=="" && hresult=="" && tresult=="" && lresult==""){
+          digitalWrite(11, LOW);  
+        }
         jsonBuffer["m"]=mresult;
         jsonBuffer["h"]=hresult;
         jsonBuffer["t"]=tresult;
         jsonBuffer["l"]=lresult;
-
+        
         serializeJson(jsonBuffer, Serial);
+        String jsonstr="";
+        serializeJson(jsonBuffer, jsonstr);
+        MySQL_Cursor *cur_mem = new MySQL_Cursor(&conn);
+        String q = "INSERT INTO DDNS_DB.plant_readings(device, time, readings) VALUES ('"+WiFi.macAddress()+"',NOW(),'"+jsonstr+"');";
+        char query[512];
+        q.toCharArray(query, 512);
+        cur_mem->execute(query);
+        jsonBuffer.clear();
         mvalue1=0;
         hvalue1=0;
         tvalue1=0;

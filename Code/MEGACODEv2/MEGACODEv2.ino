@@ -31,7 +31,8 @@ void setup() {
   pinMode(arduinoRXpin, INPUT);
   pinMode(arduinoTXpin, OUTPUT);
 
-
+  pinMode(A0, INPUT);
+  pinMode(A1, INPUT);
   smirf.begin(9600);
   smirf.listen();
   
@@ -44,26 +45,24 @@ void setup() {
 
 void loop() {
 
-  float h = dht.readHumidity()+0.01;
+  float h = dht.readHumidity();
   // Read temperature as Celsius (the default)
-  float t = dht.readTemperature()+0.01;
-
-  
+  float t = dht.readTemperature();
+  int m = analogRead(A0);
+  int l = analogRead(A1);
   if (s1 == true) {
-    int sensorValue = analogRead(A0);
     Serial.println("M");
-    Serial.println(400);
+    Serial.println(String(m));
     smirf.print('M');
-    smirf.print(400, DEC);
+    smirf.print(String(m));
     s1 = false;
     s2 = true;
     s3 = false;
     s4 = false;
   }
   else if (s2 == true) {
-    int sensorValue = analogRead(A0);
     Serial.println("H");
-    Serial.println(300);
+    Serial.println(String(h));
     smirf.print('H');
     smirf.print(String(h));
     s1 = false;
@@ -72,9 +71,8 @@ void loop() {
     s4 = false;
   }
   else if (s3 == true) {
-    int sensorValue = analogRead(A0);
     Serial.println("T");
-    Serial.println(200);
+    Serial.println(String(t));
     smirf.print('T');
     smirf.print(String(t));
     s1 = false;
@@ -83,11 +81,10 @@ void loop() {
     s4 = true;
   }
   else if (s4 == true) {
-    int sensorValue = analogRead(A0);
     Serial.println("L");
-    Serial.println(100);
+    Serial.println(String(l));
     smirf.print('L');
-    smirf.print(100, DEC);
+    smirf.print(String(l));
     s1 = true;
     s2 = false;
     s3 = false;

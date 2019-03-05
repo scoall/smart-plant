@@ -20,9 +20,9 @@ DynamicJsonDocument jsonBuffer(1024);
 SoftwareSerial cell(D2,D3);  //Create a 'fake' serial port. Pin 2 is the Rx pin, pin 3 is the Tx pin.
 bool moisture, humidity, light, temp = false;
 char m='X'; char h='X'; char l='X'; char t='X';
-char mvalue=0; char hvalue=0; char lvalue=0; char tvalue=0;
+char mvalue[6]={0}; char hvalue[6]={0}; char lvalue[6]={0}; char tvalue[6]={0};
 int mvalue1=0; int hvalue1=0; int lvalue1=0; int tvalue1=0;
-
+String mresult="";String lresult="";String tresult="";String hresult="";
 int count = 0;
 char jsonstr;
 void setup()
@@ -32,7 +32,7 @@ void setup()
   cell.begin(9600);
   Serial.print(WiFi.macAddress());
   //Let's get started!
-  Serial.println("Starting SM5100B Communication...");
+  Serial.println(" Starting SM5100B Communication...");
 }
 
 
@@ -42,81 +42,92 @@ void loop() {
   //If a character comes in from the cellular module...
   if(cell.available())
   {
-
+    
     incoming_char=cell.read();
-    if (incoming_char =='M'){
-      Serial.println();
-      count=count+1;
-      m='M';
-      check = incoming_char;
-      moisture=true;
-      humidity=false; light=false; temp = false;
-    }
-    else if (incoming_char =='H'){
-      Serial.println();
-      count=count+1;
-      h='H';
-      check = incoming_char;
-      humidity=true;
-      moisture=false; light=false; temp = false;
-    }
-    else if (incoming_char =='T'){
-      Serial.println();
-      count=count+1;
-      t='T';
-      check = incoming_char;
-      temp=true;
-      moisture=false; light=false; humidity = false;
-    }
-    else if (incoming_char =='L'){
+    if (incoming_char =='L'){
+      if (lresult!=""){
+      Serial.println("L"+lresult);
+      }
+      lresult="";
       Serial.println();
       count=count+1;
       l='L';
       check = incoming_char;
-      light=true;
-      moisture=false; humidity=false; temp = false;
+      moisture=false;
+      humidity=false; light=true; temp = false;
+    }
+    else if (incoming_char =='M'){
+       if (mresult!=""){
+      Serial.println("M"+mresult);
+       }
+      mresult="";
+      Serial.println();
+      count=count+1;
+      m='M';
+      check = incoming_char;
+      humidity=false;
+      moisture=true; light=false; temp = false;
+    }
+    else if (incoming_char =='H'){
+       if (hresult!=""){
+      Serial.println("H"+hresult);
+       }
+      hresult="";
+      Serial.println();
+      count=count+1;
+      h='H';
+      check = incoming_char;
+      temp=false;
+      moisture=false; light=false; humidity = true;
+    }
+    else if (incoming_char =='T'){
+       if (tresult!=""){
+      Serial.println("T"+tresult);
+       }
+      tresult="";
+      Serial.println();
+      count=count+1;
+      t='T';
+      check = incoming_char;
+      light=false;
+      moisture=false; humidity=false; temp = true;
     }
     
     else{    
       value = value+incoming_char;
-      Serial.print(value);       
+      
+      //Serial.print(value);       
       if (moisture==true){
-        mvalue=value;
+        mresult=mresult+value;
         mvalue1=mvalue1+1;
       }
       else if (humidity==true){
-        hvalue=value;
+        hresult=hresult+value;
         hvalue1=hvalue1+1;
       }
       else if (light==true){
-        lvalue=value;
+        lresult=lresult+value;
         lvalue1=lvalue1+1;
       }
       else if (temp==true){
-        tvalue=value;
+        tresult=tresult+value;
         tvalue1=tvalue1+1;
-      }       
+      }
     }
     if (mvalue1>=6 && tvalue1>=6 && lvalue1>=6 && hvalue1>=6){
     
-        
-        jsonBuffer["m"]=mvalue;
-        jsonBuffer["h"]=hvalue;
-        jsonBuffer["t"]=tvalue;
-        jsonBuffer["l"]=lvalue;
-        /*Serial.println(mvalue);
-        Serial.println(hvalue);
-        Serial.println(tvalue);
-        Serial.println(lvalue);*/
+
+        jsonBuffer["m"]=mresult;
+        jsonBuffer["h"]=hresult;
+        jsonBuffer["t"]=tresult;
+        jsonBuffer["l"]=lresult;
+
         serializeJson(jsonBuffer, Serial);
         mvalue1=0;
         hvalue1=0;
         tvalue1=0;
         lvalue1=0;
-        mvalue=0;
-        hvalue=0;
-        tvalue=0;
-        lvalue=0;
+
     }
     
   }

@@ -2,6 +2,23 @@
 @import url(https://fonts.googleapis.com/css?family=Karla);
 @import url('https://fonts.googleapis.com/css?family=Bitter');
 
+.table > tbody > tr > td
+{
+    font-size:20px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    text-align: center;
+    float: center;
+}
+.table>thead>tr>th
+{
+    text-align: center;
+    float: center;
+}
+
+
 .headerr
 {
 
@@ -119,15 +136,14 @@ p {
 
 .logo {
 
-    font-size: 20px;
+    font-size: 16px;
     color: darkgreen;
     font-family: 'Karla', sans-serif;
     float: left;
-    display: block;
-    margin-top: 0;
-    line-height: 1;
-    margin-bottom: 10px;
+    margin-top: 0;    
+    margin-left:0 !important;
     text-decoration: none;
+    display:inline-block;
 }
 @media only screen and (max-width: 766px) {
     .logo {
@@ -136,8 +152,8 @@ p {
 }
 
 nav {
-    float: right;
-    width: 60%;
+   
+    width: 100%;
 }
 @media only screen and (max-width: 766px) {
     nav {
@@ -147,21 +163,20 @@ nav {
 nav ul {
     list-style: none;
     overflow: hidden;
-    text-align: right;
-    float: right;
+    float: left;
 }
 @media only screen and (max-width: 766px) {
     nav ul {
         padding-top: 10px;
         margin-bottom: 22px;
-        float: left;
+        float: center;
         text-align: center;
         width: 100%;
     }
 }
 nav ul li {
     display: inline-block;
-    margin-left: 35px;
+    margin-right: 35px;
     line-height: 1.5;
 }
 @media only screen and (max-width: 766px) {
@@ -174,7 +189,7 @@ nav ul li {
 nav ul a {
     color: #888888;
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 14px;
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
     transition: all 500ms linear;

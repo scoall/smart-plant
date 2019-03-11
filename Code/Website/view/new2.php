@@ -1,3 +1,12 @@
+<?php
+ini_set('display_errors','On');
+error_reporting(E_ALL);
+session_start();
+$_POST['username'] = "Missmeva"; //CHANGE IT !!!
+ ?>
+
+
+
 <html>
     <head>
         <title>Welcome to SmartEcoSystem !</title>
@@ -267,7 +276,9 @@
                     <div class="modal-body"> 
                         
                         <center><img src="planticon.png" height="100" width="100" style="display:block"></center><br>
+                        
                         <form action="../model/addPlant.php" method="post" name="formm" id="formm" enctype="multipart/form-data">
+                            <input type="hidden" name="username" value="Missmeva">
                             <center><div class="form-group">
                                 <label>Your plant's image</label>
                                 <input type="file" name="pic" id="pic" >
@@ -275,11 +286,11 @@
 
                             <div class="form-group">
                                 <center><label for="pwd">Key <br>(please check the number located on device's case)</label></center>
-                                <input type="text" class="form-control" id="key">
+                                <input type="text" class="form-control" name="key">
                             </div>
                             <div class="form-group">
                                 <center><label for="pwd">Plant spiecies</label></center>
-                                <input type="text" class="form-control" id="species">
+                                <input type="text" class="form-control" name="species">
                             </div>
                             <center>
                                 <label>Light demand</label><br>
@@ -305,7 +316,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <center><button type="submit" class="btn btn-default">Submit</button></center>
+                        <center><button type="submit" form="formm" value="Submit" class="btn btn-default">Submit</button></center>
                     </div>
                 </div>
 
@@ -358,12 +369,17 @@
                                 <th></th>
                                 <th>Moisture</th>
                                 <th>Temperature (C)</th>
-                                <th>Humidity</th>
                                 <th>LightLevel</th>
+                                <th>Humidity</th>
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody> <!-- ALL THIS NEEDS TO BE CHANGED/DISPLAYED WITH PHP+HTML -->
+                        <tbody> 
+                            
+                            <?php include '../model/getPlants.php'; ?>
+                            
+                            <!-- ALL THIS NEEDS TO BE CHANGED/DISPLAYED WITH PHP+HTML -->
+                            <!--
                             <tr>
                                 <th><img src="flower3.png" class="img-circle" height="80" width="80" style="display:block"></th>
                                 <td>Veratrum viride</td>
@@ -396,7 +412,12 @@
                                 <td>78%</td>
                                 <td>700</td>
                                 <td><button type="button" class="btn btn-info" height="60" width="60">MORE</button></td>
-                            </tr>
+                            </tr> -->
+                            
+                            
+                            
+                            
+                            
                         </tbody> <!-- ALL THIS NEEDS TO BE CHANGED/DISPLAYED WITH PHP+HTML -->
                     </table>
 

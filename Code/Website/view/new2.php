@@ -338,10 +338,10 @@ $_POST['username'] = "Missmeva"; //CHANGE IT !!!
                         <nav>
                             <ul>
                                 <li><a href="#sec00">Your plants</a></li>
-                                <li><a href="#sec01">Temperature</a></li>
-                                <li><a href="#sec02">Moisture</a></li>
-                                <li><a href="#sec03">Humidity</a></li>
-                                <li><a href="#sec04">Light level</a></li>
+                                <li><a href="#sec01">Moisture</a></li>
+                                <li><a href="#sec02">Temperature</a></li>
+                                <li><a href="#sec03">Light level</a></li>
+                                <li><a href="#sec04">Humidity</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -368,7 +368,7 @@ $_POST['username'] = "Missmeva"; //CHANGE IT !!!
                                 <th>Plant species</th>
                                 <th></th>
                                 <th>Moisture</th>
-                                <th>Temperature (C)</th>
+                                <th>Temperature</th>
                                 <th>LightLevel</th>
                                 <th>Humidity</th>
                                 <th></th>
@@ -427,7 +427,7 @@ $_POST['username'] = "Missmeva"; //CHANGE IT !!!
             <div class="hideshow2">
                 <section class="row dark" id="sec01">
                     <div class="content">
-                        <h1 >Temperature readings</h1>
+                        <h1 >Moisture readings</h1>
                         <div id="legends">
 
                         </div>
@@ -437,21 +437,21 @@ $_POST['username'] = "Missmeva"; //CHANGE IT !!!
 
                 <section class="row" id="sec02">
                     <div class="content">
-                        <h1>Section 02</h1>
+                        <h1>Temperature readings</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, recusandae, at, labore velit eligendi amet nobis repellat natus sequi sint consectetur excepturi doloribus vero provident consequuntur accusamus quisquam nesciunt cupiditate soluta alias illo et deleniti voluptates facilis repudiandae similique dolore quaerat architecto perspiciatis officiis dolor ullam expedita suscipit neque minima rem praesentium inventore ab officia quos dignissimos esse quam placeat iste porro eius! Minus, aspernatur nesciunt </p>
                     </div>
                 </section><!-- END row -->
 
                 <section class="row dark" id="sec03">
                     <div class="content">
-                        <h1>Section 03</h1>
+                        <h1>Light level</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, recusandae, at, labore velit eligendi amet nobis repellat natus sequi sint consectetur excepturi doloribus vero provident consequuntur accusamus quisquam nesciunt cupiditate soluta alias illo et deleniti voluptates facilis repudiandae similique dolore quaerat architecto perspiciatis officiis dolor ullam expedita suscipit neque minima rem praesentium inventore ab officia quos dignissimos esse quam placeat iste porro eius! Minus, aspernatur nesciunt consectetur. Sit, eius, itaque, porro, beatae impedit officia tenetur reiciendis autem vitae a quae ipsam repudiandae odio dolorum </p>
                     </div>
                 </section><!-- END row -->
 
                 <section class="row" id="sec04">
                     <div class="content">
-                        <h1>Section 04</h1>
+                        <h1>Humidity</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, recusandae, at, labore velit eligendi amet nobis repellat natus sequi sint consectetur excepturi doloribus vero provident consequuntur accusamus quisquam nesciunt cupiditate soluta alias illo et deleniti voluptates facilis repudiandae similique dolore quaerat architecto perspiciatis officiis dolor ullam expedita suscipit neque minima rem praesentium inventore ab officia quos dignissimos esse quam placeat iste porro eius! Minus, aspernatur nesciunt consectetur. Sit, eius, itaque, porro, beatae impedit officia tenetur reiciendis autem vitae a quae ipsam repudiandae odio dolorum </p>
                     </div>
                 </section><!-- END row -->

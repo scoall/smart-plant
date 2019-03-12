@@ -249,7 +249,7 @@ else if(isset($_POST['submit-reg']))
 
         <div class="slider2">
             <div class="hero">
-                <p  style="color:black">Sed ut perspiciatis unde omnis iste natus error sit voluptatem <br> accusantium doloremque laudantium, totam rem aperiam, <br> eaque ipsa quae ab illo inventore veritatis et quasi architecto <br> beatae  vitae dicta sunt explicabo.<br> Nemo enim ipsam voluptatem quia voluptas sit odit aut fugit, <br> sed quia consequuntur magni dolores eos qui ratione. <br> Neque porro quisquam est, qui dolorem adipisci velit.
+                <p  style="color:black">Our system brings a high tech solution to an age old problem, <br> allowing you to provide specific care to your favourite plants or flowers <br> at home or in the workplace. Whether you’re a resident Dr. Greenthumb <br> or want to bring some green space to an urban office, <br> the data our system collects will enable you to monitor the real time condition <br> of your chosen flora as well as chart its historical situation over time.<br> We give you the information to make informed decisions <br> to allow your herb garden, window box or office dwelling <br> succulent  to not only grow, but to thrive.
 
                 </p>
 
@@ -267,28 +267,28 @@ else if(isset($_POST['submit-reg']))
                     <div class="mySlides"> 
                         <button class="w3-button fa fa-chevron-left" style="border:none; background-color:white;color:black;font-size:30px" onclick="plusDivs(-1)"></button>
                         <img src="arduino.png" style="width:100%"><button class="w3-button fa fa-chevron-right" style="border:none; background-color:white;color:black;font-size:30px" onclick="plusDivs(+1)"></button>
-                        <p style="color:black;z-index:100">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione  </p>
+                        <p style="color:black;z-index:100">Our hardware solution consists of an Arduino board, WiFi adaptor and multiple sensors  that work together to provide you with data to inform your decisions. The Arduino board is the ‘brains’ of the operation,  think of it as a tiny computer dedicated to collecting data on your plant.</p>
 
                     </div>
                     <div class="mySlides"> 
                         <button class="w3-button fa fa-chevron-left" style="border:none; background-color:white;color:black;font-size:30px" onclick="plusDivs(-1)"></button>
                         <img  src="sensor.png" style="width:100%"><button class="w3-button fa fa-chevron-right" style="border:none; background-color:white;color:black;font-size:30px" onclick="plusDivs(+1)"></button>
-                        <p style="color:black;z-index:100"> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur</p>
+                        <p style="color:black;z-index:100"> The WiFi adaptor allows this data to be sent to our online service wirelessly,  whilst the sensors record data  such as the current temperature, humidity, received light level  and mositure content of the soil.  This data can help guide you  to water your flowering buddy or to move your pungent plant to a better light source.  We do the science so you can focus on the nature.</p>
                     </div>
                     <div class="mySlides"> 
                         <button class="w3-button fa fa-chevron-left" style="border:none; background-color:white;color:black;font-size:30px" onclick="plusDivs(-1)"></button>
                         <img  src="db.png" style="width:100%"><button class="w3-button fa fa-chevron-right" style="border:none; background-color:white;color:black;font-size:30px"   onclick="plusDivs(+1)"></button>
-                        <p style="color:black;z-index:100"> Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione </p>
+                        <p style="color:black;z-index:100">In order to provide you with not only current but also historical data, a dedicated database is required to store all this useful information.  A new entry is recorded in the database every ~15 minutes [dependent on WiFi connection]  providing you with accurate, up to date information. But don’t worry,  we don’t collect any personal or geographical data on our customers  as we pride ourselves on putting privacy first.</p>
                     </div>
                     <div class="mySlides"> 
                         <button class="w3-button fa fa-chevron-left" style="border:none; background-color:white;color:black;font-size:30px" onclick="plusDivs(-1)"></button>
                         <img  src="plant.png" style="width:100%"><button class="w3-button fa fa-chevron-right" style="border:none; background-color:white;color:black;font-size:30px" onclick="plusDivs(+1)"></button>
-                        <p style="color:black;z-index:100"> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur</p>
+                        <p style="color:black;z-index:100"> We are passionate about plants, greenspace and the environment just as much  as we love gadgets  and technological wizardry. Our device will work with any plant or flower  from a Venus Fly Trap to a potted Daffodil. </p>
                     </div>
 
                     <div class="mySlides"> 
                          <button class="w3-button fa fa-chevron-left" style="border:none; background-color:white;color:black;font-size:30px" onclick="plusDivs(-1)"></button><img  src="website.png" style="width:100%"><button class="w3-button fa fa-chevron-right" style="border:none; background-color:white;color:black;font-size:30px" onclick="plusDivs(+1)"></button>
-                        <p style="color:black;z-index:100">  Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur</p>
+                        <p style="color:black;z-index:100"> What use is all the data we collect if it’s impossible to read? <br> Our web service allows you to view this data in an easy to read  and intuitive manner, allowing you to access this information  from anywhere with an internet connection. We give you the power to locate specific information  or combine data types to do more in depth analysis. </p>
                     </div>
                 </div>
 
@@ -303,17 +303,7 @@ else if(isset($_POST['submit-reg']))
             <img id="newimage" src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages.rosendahl.dk%2Fproducts%2F434%2F353%2F2%2F4343532%2Fv%2F4343532-2%2FXXLarge%2Fdwl-hanging-pot-14-cm-design-with-light-1500x1500-2.png&f=1" >
         </div>    
 
-        <div class="slider4">
-            <div class="hero">
-                <p  style="color:black">Sed ut perspiciatis unde omnis iste natus error sit voluptatem <br> accusantium doloremque laudantium, totam rem aperiam, <br> eaque ipsa quae ab illo inventore veritatis et quasi architecto <br> beatae  vitae dicta sunt explicabo.<br> Nemo enim ipsam voluptatem quia voluptas sit odit aut fugit, <br> sed quia consequuntur magni dolores eos qui ratione. <br> Neque porro quisquam est, qui dolorem adipisci velit.
-
-                </p>
-
-                <button class="btn btn-hero btn-lg herro" id="hidetext4" >Come back</button>
-
-            </div>
-            <img id="newimage" src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fe0%2F63%2F45%2Fe06345722bb2baf7c352c9b3d49025db.png&f=1" >
-        </div> 
+     
 
         <div class="slider5">
             <div class="hero">
@@ -473,7 +463,7 @@ else if(isset($_POST['submit-reg']))
                 myIndex++;
                 if (myIndex > x.length) {myIndex = 1}    
                 x[myIndex-1].style.display = "block";  
-                setTimeout(carousel, 4000); // Change image every 4 seconds
+                setTimeout(carousel, 13000); // Change image every 4 seconds
             }
         </script>
         <script>

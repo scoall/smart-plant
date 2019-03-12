@@ -92,12 +92,14 @@ if(isset($username))
             echo'<img src="like.png"  height="40" width="40" style="display:block">Perfect</center></th>';
         }
         
+        $readings->l = $readings->l/10; // divide by 1000 and multiply by 100 -> x/10
+        $readings->m = $readings->m/10;
         
             echo'
-                <td>'.$readings->m.'</td>
-                <td>'.$readings->t.'</td>
-                <td>'.$readings->l.'</td>
-                <td>'.$readings->h.'</td>
+                <td>'.$readings->m.'%</td>
+                <td>'.$readings->t.'°C</td>
+                <td>'.$readings->l.'%</td>
+                <td>'.round($readings->h).'%</td>
                 <td><button type="button" class="btn btn-info" height="60" width="60">MORE</button></td>
             </tr>';
 

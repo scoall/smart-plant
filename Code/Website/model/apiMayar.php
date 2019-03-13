@@ -82,10 +82,26 @@ function getReadings($device)
 		}
 		
 		return json_encode($rows);
+	
+          
+}
+
+function getAllReadings($device,$minTime)
+{
+    global $conn;
+    $stmt = mysqli_stmt_init($conn);
+    $sql = "SELECT * FROM plant_readings WHERE device = ? AND time>? ORDER BY time ASC LIMIT 48" ;
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt,'ss', $device, $minTime);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $rows = array();
+		while($r = mysqli_fetch_assoc($result)) 
+        {
+    		$rows[] = $r;
+		}
 		
-		
-		
-    
-   
+		return json_encode($rows);
+	
           
 }

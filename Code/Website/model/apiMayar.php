@@ -86,11 +86,57 @@ function getReadings($device)
           
 }
 
-function getAllReadings($device,$minTime)
+function getAllReadings($device,$minTime, $maxTime)
 {
     global $conn;
     $stmt = mysqli_stmt_init($conn);
-    $sql = "SELECT * FROM plant_readings WHERE device = ? AND time>? ORDER BY time ASC LIMIT 48" ;
+    $sql = "SELECT * FROM plant_readings WHERE device = ? AND time>? AND time<? ORDER BY time ASC LIMIT 48" ;
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt,'sss', $device, $minTime, $maxTime);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $rows = array();
+		while($r = mysqli_fetch_assoc($result)) 
+        {
+    		$rows[] = $r;
+		}
+		
+		return json_encode($rows);
+	
+          
+}
+
+function getAllReadingsWeekView($device,$minTime)
+{
+    global $conn;
+    $stmt = mysqli_stmt_init($conn);
+    $sql = "SELECT * FROM plant_readings WHERE device = ? AND time>? ORDER BY time ASC LIMIT 336" ;
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt,'ss', $device, $minTime);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $rows = array();
+    try{
+		while($r = mysqli_fetch_assoc($result)) 
+        {
+    		$rows[] = $r;
+		}
+		
+		return json_encode($rows);
+    }
+    catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+    }
+	
+          
+}
+
+
+function getAllReadingsMonthView($device,$minTime)
+{
+    global $conn;
+    $stmt = mysqli_stmt_init($conn);
+    $sql = "SELECT * FROM plant_readings WHERE device = ? AND time>? ORDER BY time ASC LIMIT 1488" ;
     mysqli_stmt_prepare($stmt, $sql);
     mysqli_stmt_bind_param($stmt,'ss', $device, $minTime);
     mysqli_stmt_execute($stmt);
@@ -100,7 +146,7 @@ function getAllReadings($device,$minTime)
         {
     		$rows[] = $r;
 		}
-		
+		 
 		return json_encode($rows);
 	
           

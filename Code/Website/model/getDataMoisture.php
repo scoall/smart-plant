@@ -8,23 +8,77 @@ $seriesTemp=null;
 $seriesLight=null;
 $seriesHumidity=null;
 
-$device="5C:CF:7F:10:4D:";
-$minTimestamp = strtotime("-24 hours"); 
+$seriesMoistWeek=null;
+$seriesTempWeek=null;
+$seriesLightWeek=null;
+$seriesHumidityWeek=null;
+
+$seriesMoistMonth=null;
+$seriesTempMonth=null;
+$seriesLightMonth=null;
+$seriesHumidityMonth=null;
+
+
+$device="5C:CF:7F:10:4D:"; //HARDCODED, CHANGE IT !!!!!!
+$minTimestamp = strtotime("last monday midnight"); //HARDCODEEEED !!!!
+$maxTimestamp = strtotime("last tuesday midnight");  //HARDCODEEEED !!!!
+$minTimestampWeek = strtotime("-7 day midnight"); 
+$minTimestampMonth = strtotime("first day of this month midnight ", time());
 $minTime = date('Y-m-d H:i:s', $minTimestamp);
-$plantreadings = getAllReadings($device, $minTime); //sort by time, get newest ones
+$maxTime = date('Y-m-d H:i:s', $maxTimestamp);
+$minWeek = date('Y-m-d H:i:s', $minTimestampWeek);
+$minMonth = date('Y-m-d H:i:s', $minTimestampMonth);
+
+$plantreadings = getAllReadings($device, $minTime, $maxTime); //sort by time, get newest ones
 $jsonReadings = json_decode($plantreadings); // get readings table
+
+$plantreadingsWeekView = getAllReadingsWeekView($device, $minWeek); //sort by time, get newest ones
+$jsonReadingsWeek = json_decode($plantreadingsWeekView); // get readings table
+
+
+$plantreadingsMonthView = getAllReadingsMonthView($device, $minMonth); //sort by time, get newest ones
+$jsonReadingsMonth = json_decode($plantreadingsMonthView); 
 
 
 $moist = array();
 $temp = array();
 $humidity = array();
 $light = array();
+$time = array();
+
+$moistWeek = array();
+$tempWeek = array();
+$humidityWeek = array();
+$lightWeek = array();
+$timeWeek = array();
+$timeWeek2 = array();
+
+$moistMonth = array();
+$tempMonth = array();
+$humidityMonth = array();
+$lightMonth = array();
+$timeMonth = array();
+
+
+
 $i=0;
-$z = '';
-$seriesMoist=$seriesMoist.'{"name": "Today", "data":[';
+$iWeek=0;
+$iMonth=0;
+
+$seriesMoist=$seriesMoist.'';
 $seriesTemp=$seriesTemp.'{"name": "Today", "data":[';
 $seriesLight=$seriesLight.'{"name": "Today", "data":[';
 $seriesHumidity=$seriesHumidity.'{"name": "Today", "data":[';
+
+$seriesMoistWeek=$seriesMoistWeek.'{"name": "This week", "data":[';
+$seriesTempWeek=$seriesTempWeek.'{"name": "This week", "data":[';
+$seriesLightWeek=$seriesLightWeek.'{"name": "This week", "data":[';
+$seriesHumidityWeek=$seriesHumidityWeek.'{"name": "This week", "data":[';
+
+$seriesMoistMonth=$seriesMoistMonth.'{"name": "This month", "data":[';
+$seriesTempMonth=$seriesTempMonth.'{"name": "This month", "data":[';
+$seriesLightMonth=$seriesLightMonth.'{"name": "This month", "data":[';
+$seriesHumidityMonth=$seriesHumidityMonth.'{"name": "This month", "data":[';
 
 
 foreach($jsonReadings as $data)
@@ -32,11 +86,13 @@ foreach($jsonReadings as $data)
 
     $date = $data->time;
     $readings = json_decode($data->readings); //get very readings
-    $time[$i] = date("H:i",strtotime($date)); //get time e.q. 12.25 || 18.01
+    $time[$i] = strtotime($date);
+
     $neww1 = $readings->m/10;
     $neww2 = $readings->t;
     $neww3 = $readings->h;
     $neww4 = $readings->l/10;
+
     $moist[$i] = $neww1;
     $temp[$i] = $neww2;
     $humidity[$i] = $neww3;
@@ -47,238 +103,242 @@ foreach($jsonReadings as $data)
 
 }
 
-for($j=0;$j<$i-1;$j++)
+foreach($jsonReadingsWeek as $data)
 {
 
-    $z=$z."'". $time[$j] . "',";
-    $seriesMoist=$seriesMoist."". $moist[$j] . ",";
+    $date = $data->time;
+
+    $readings = json_decode($data->readings); //get very readings
+    $timeWeek[$iWeek] = date("H:i",strtotime($date)); //get time e.q. 12.25 || 18.01
+    $timeWeek2[$iWeek] = strtotime($date)."000";
+    $neww1 = $readings->m/10;
+    $neww2 = $readings->t;
+    $neww3 = $readings->h;
+    $neww4 = $readings->l/10;
+    $moistWeek[$iWeek] = $neww1;
+    $tempWeek[$iWeek] = $neww2;
+    $humidityWeek[$iWeek] = $neww3;
+    $lightWeek[$iWeek] = $neww4;
+
+    $iWeek++;
+
+
+}
+
+foreach($jsonReadingsMonth as $data)
+{
+
+    $date = $data->time;
+    $readings = json_decode($data->readings); //get very readings
+    $timeMonth[$iMonth] = date("H:i",strtotime($date)); //get time e.q. 12.25 || 18.01
+    $neww1 = $readings->m/10;
+    $neww2 = $readings->t;
+    $neww3 = $readings->h;
+    $neww4 = $readings->l/10;
+    $moistMonth[$iMonth] = $neww1;
+    $tempMonth[$iMonth] = $neww2;
+    $humidityMonth[$iMonth] = $neww3;
+    $lightMonth[$iMonth] = $neww4;
+
+    $iMonth++;
+
+
+}
+
+for($j=0;$j<$i-1;$j++) //DAY 
+{
+
+   
+    $seriesMoist=$seriesMoist."{x: moment.unix(".$time[$j].").format('HH:mm'), y: ".$moist[$j]. "},";
     $seriesTemp=$seriesTemp."". $temp[$j] . ",";
     $seriesLight=$seriesLight."". $moist[$j] . ",";
     $seriesHumidity=$seriesHumidity."". $humidity[$j] . ",";
 
 }
 
+for($j=0;$j<$iWeek-1;$j++) //WEEK
+{
+    $timeee = strtotime($timeWeek[$j]);
+    $seriesMoistWeek=$seriesMoistWeek."{x: new Date(".$timeWeek2[$j]."), y: ".$moistWeek[$j]. "},";
+    $seriesTempWeek=$seriesTempWeek."". $tempWeek[$j] . ",";
+    $seriesLightWeek=$seriesLightWeek."". $moistWeek[$j] . ",";
+    $seriesHumidityWeek=$seriesHumidityWeek."". $humidityWeek[$j] . ",";
 
-$z=$z."'". $time[$i-1] . "'";
-$seriesMoist=$seriesMoist."". $moist[$i-1]."]},";
+}
+
+for($j=0;$j<$iMonth-1;$j++) //MONTH
+{
+
+    
+    $seriesMoistMonth=$seriesMoistMonth."". $moistMonth[$j] . ",";
+    $seriesTempMonth=$seriesTempMonth."". $tempMonth[$j] . ",";
+    $seriesLightMonth=$seriesLightMonth."". $moistMonth[$j] . ",";
+    $seriesHumidityMonth=$seriesHumidityMonth."". $humidityMonth[$j] . ",";
+
+}
+
+
+
+$seriesMoist=$seriesMoist."{x: moment.unix(".$time[$i-1].").format('HH:mm'), y: ".$moist[$i-1]. "}";
 $seriesTemp=$seriesTemp."". $temp[$i-1]."]},";
 $seriesLight=$seriesLight."". $light[$i-1]."]},";
 $seriesHumidity=$seriesHumidity."". $humidity[$i-1]."]},";
 
 
+$seriesMoistWeek=$seriesMoistWeek."{x: new Date(".$timeWeek2[$iWeek-1]."), y: ".$moistWeek[$iWeek-1]. "}]},";
+$seriesTempWeek=$seriesTempWeek."". $tempWeek[$iWeek-1]."]},";
+$seriesLightWeek=$seriesLightWeek."". $lightWeek[$iWeek-1]."]},";
+$seriesHumidityWeek=$seriesHumidityWeek."". $humidityWeek[$iWeek-1]."]},";
+
+
+$seriesMoistMonth=$seriesMoistMonth."". $moistMonth[$iMonth-1]."]},";
+$seriesTempMonth=$seriesTempMonth."". $tempMonth[$iMonth-1]."]},";
+$seriesLightMonth=$seriesLightMonth."". $lightMonth[$iMonth-1]."]},";
+$seriesHumidityMonth=$seriesHumidityMonth."". $humidityMonth[$iMonth-1]."]},";
+
+//FIXED TILL THERE
+
 echo"<script>
 
 
 
-            var someDiv = document.getElementById('legends1');
-           
-            var chart = new Chartist.Line('#chart1', {
 
-              labels: [".$z."],
-                series: [".$seriesMoist."]
+   var result = [".$seriesMoist."];
 
+// parse labels and data
+var labels = result.map(e => moment(e.x, 'HH:mm'));
+var data = result.map(e => +e.y);
 
-            }, {
-
-                fullWidth: true,
-                chartPadding: {
-                    right: 40
-                },
-                plugins: [
-                    Chartist.plugins.legend({
-                        clickable: true,
-                        position: someDiv
-                    })
-                ]
-            });
-
-
-            var someDiv = document.getElementById('legends2');
-            var chart = new Chartist.Line('#chart2', {
-
-              labels: [".$z."],
-                series: [".$seriesTemp."]
-
-
-            }, {
-
-                fullWidth: true,
-                chartPadding: {
-                    right: 40
-                },
-                plugins: [
-                    Chartist.plugins.legend({
-                        clickable: true,
-                        position: someDiv
-                    })
-                ]
-            });
-
-
-            var someDiv = document.getElementById('legends3');
-            var chart = new Chartist.Line('#chart3', {
-
-              labels: [".$z."],
-                series: [".$seriesLight."]
-
-
-            }, {
-
-                fullWidth: true,
-                chartPadding: {
-                    right: 40
-                },
-                plugins: [
-                    Chartist.plugins.legend({
-                        clickable: true,
-                        position: someDiv
-                    })
-                ]
-            });
-
-            var someDiv = document.getElementById('legends4');
-            var chart = new Chartist.Line('#chart4', {
-
-              labels: [".$z."],
-                series: [".$seriesHumidity."]
-
-
-            }, {
-
-                fullWidth: true,
-                chartPadding: {
-                    right: 40
-                },
-                plugins: [
-                    Chartist.plugins.legend({
-                        clickable: true,
-                        position: someDiv
-                    })
-                ]
-            });
-
-
-
-
-                     // Let's put a sequence number aside so we can use it in the event callbacks
-                     var seq = 0,
-                     delays = 80,
-                     durations = 500;
-
-                     // Once the chart is fully created we reset the sequence
-                     chart.on('created', function() {
-                     seq = 0;
-                     });
-
-                     // On each drawn element by Chartist we use the Chartist.Svg API to trigger SMIL animations
-                     chart.on('draw', function(data) {
-                     seq++;
-
-                     if(data.type === 'line') {
-                     // If the drawn element is a line we do a simple opacity fade in. This could also be achieved using CSS3 animations.
-                     data.element.animate({
-                     opacity: {
-                     // The delay when we like to start the animation
-                     begin: seq * delays + 1000,
-                     // Duration of the animation
-                     dur: durations,
-                     // The value where the animation should start
-                     from: 0,
-                     // The value where it should end
-                     to: 1
-                     }
-                     });
-                     } else if(data.type === 'label' && data.axis === 'x') {
-                     data.element.animate({
-                     y: {
-                     begin: seq * delays,
-                     dur: durations,
-                     from: data.y + 100,
-                     to: data.y,
-                     // We can specify an easing function from Chartist.Svg.Easing
-                     easing: 'easeOutQuart'
-                     }
-                     });
-                     } else if(data.type === 'label' && data.axis === 'y') {
-                     data.element.animate({
-                     x: {
-                     begin: seq * delays,
-                     dur: durations,
-                     from: data.x - 100,
-                     to: data.x,
-                     easing: 'easeOutQuart'
-                     }
-                     });
-                     } else if(data.type === 'point') {
-                     data.element.animate({
-                     x1: {
-                     begin: seq * delays,
-                     dur: durations,
-                     from: data.x - 10,
-                     to: data.x,
-                     easing: 'easeOutQuart'
-                     },
-                     x2: {
-                     begin: seq * delays,
-                     dur: durations,
-                     from: data.x - 10,
-                     to: data.x,
-                     easing: 'easeOutQuart'
-                     },
-                     opacity: {
-                     begin: seq * delays,
-                     dur: durations,
-                     from: 0,
-                     to: 1,
-                     easing: 'easeOutQuart'
-                     }
-                     });
-                     } else if(data.type === 'grid') {
-                     // Using data.axis we get x or y which we can use to construct our animation definition objects
-                     var pos1Animation = {
-                     begin: seq * delays,
-                     dur: durations,
-                     from: data[data.axis.units.pos + '1'] - 30,
-                to: data[data.axis.units.pos + '1'],
-                    easing: 'easeOutQuart'
-            };
-
-            var pos2Animation = {
-                begin: seq * delays,
-                dur: durations,
-                from: data[data.axis.units.pos + '2'] - 100,
-                to: data[data.axis.units.pos + '2'],
-                easing: 'easeOutQuart'
-            };
-
-            var animations = {};
-            animations[data.axis.units.pos + '1'] = pos1Animation;
-            animations[data.axis.units.pos + '2'] = pos2Animation;
-            animations['opacity'] = {
-                begin: seq * delays,
-                dur: durations,
-                from: 0,
-                to: 1,
-                easing: 'easeOutQuart'
-            };
-
-            data.element.animate(animations);
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+   type: 'line',
+   data: {
+      labels: labels,
+      datasets: [{
+         label: 'Today',
+         data: data,
+         borderWidth: 1,
+         borderColor: 'rgb(92, 255, 244)'
+      }]
+   },
+   options: {
+      scales: {
+         xAxes: [{
+            type: 'time',
+            ticks:
+            {fontColor: 'rgba(255, 255, 255, 0.9)',
+            fontSize: '9'},
+            time: {
+               unit: 'hour',
+               displayFormats: {
+                  hour: 'HH:mm'
+               }
             }
-            });
+         }]
+      },
+   }
+});
+
+$('#sel1').change(function()
+                  {
+
+
+                      if($(this).val()==1)
+
+                      {
+                          var result = [".$seriesMoist."];
+
+                        // parse labels and data
+                        var labels = result.map(e => moment(e.x, 'HH:mm'));
+                        var data = result.map(e => +e.y);
+
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                           type: 'line',
+                           data: {
+                              labels: labels,
+                              datasets: [{
+                                 label: 'Today',
+                                 data: data,
+
+                                 borderWidth: 1,
+                                 borderColor: 'rgb(92, 255, 244)'
+                              }]
+                           },
+                           options: {
+                              scales: {
+                                 xAxes: [{
+                                    type: 'time',
+                                    ticks:
+                                    {fontColor: '#fff'},
+                                    time: {
+                                       unit: 'hour',
+                                       displayFormats: {
+                                          hour: 'HH:mm'
+                                       }
+                                    }
+                                 }]
+                              },
+                           }
+                        });
+
+
+                      }
+
+
+                      else if($(this).val()==2) // WEEK VIEW
+
+                      {
+                      
+                      var result = [".$seriesMoistWeek."];
+
+                        // parse labels and data
+                        var labels = result.map(e => moment(e.x, 'HH:mm'));
+                        var data = result.map(e => +e.y);
+
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                           type: 'line',
+                           data: {
+                              labels: labels,
+                              datasets: [{
+                                 label: 'Today',
+                                 data: data,
+
+                                 borderWidth: 1,
+                                 borderColor: 'rgb(92, 255, 244)'
+                              }]
+                           },
+                           options: {
+                              scales: {
+                                 xAxes: [{
+                                    type: 'time',
+                                    ticks:
+                                    {fontColor: '#fff'},
+                                    time: {
+                                       unit: 'hour',
+                                       displayFormats: {
+                                          hour: 'HH:mm'
+                                       }
+                                    }
+                                 }]
+                              },
+                           }
+                        });
+
+                      
+                      
+                      }
+
+                      else if($(this).val()==3)
+
+                      {alert(3);}
+
+                  });
 
 
 
 
-
-            chart.on('created', function() {
-                if(window.__exampleAnimateTimeout) {
-                    clearTimeout(window.__exampleAnimateTimeout);
-                    window.__exampleAnimateTimeout = null;
-                }
-                window.__exampleAnimateTimeout = setTimeout(chart.update.bind(chart), 100000);
-            });
-
-
-        </script>";
+</script>";
 
 ?>

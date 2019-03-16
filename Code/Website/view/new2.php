@@ -18,8 +18,10 @@ $_POST['username'] = "Missmeva"; //CHANGE IT !!!
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.0/chartist.js"></script>
-        <script src="../controller/chartist-plugin-legend.js"></script>
+        <script src="https://momentjs.com/downloads/moment.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
         <script src="JS.js"></script>
+        
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
@@ -29,135 +31,7 @@ $_POST['username'] = "Missmeva"; //CHANGE IT !!!
 
         <style>
 
-            .form-control:focus {
-                border-color: black;
-
-            }
-
-           
-
-            .ct-label
-            {
-                color: #fff !important;
-                font-size:10px;
-            }
-
-            .ct-grids
-            {
-                color: #fff !important;
-            }
-            .ct-chart {
-                position: relative;
-                max-height:500px;
-            }
-            .ct-legend {
-                position: relative;
-                z-index: 10;
-                list-style: none;
-                text-align: center;
-            }
-            .ct-legend li {
-                position: relative;
-                padding-left: 23px;
-                margin-right: 10px;
-                margin-bottom: 3px;
-                cursor: pointer;
-                display: inline-block;
-            }
-            .ct-legend li:before {
-                width: 12px;
-                height: 12px;
-                position: absolute;
-                left: 0;
-                content: "";
-                border: 3px solid transparent;
-                border-radius: 2px;
-            }
-            .ct-legend li.inactive:before {
-                background: transparent;
-            }
-            .ct-legend.ct-legend-inside {
-                position: absolute;
-                top: 0;
-                right: 0;
-            }
-            .ct-legend.ct-legend-inside li{
-                display: block;
-                margin: 0;
-            }
-            .ct-legend .ct-series-0:before {
-                background-color: aquamarine;
-                border-color: aquamarine;
-            }
-            .ct-legend .ct-series-1:before {
-                background-color: #f05b4f;
-                border-color: #f05b4f;
-            }
-            .ct-legend .ct-series-2:before {
-                background-color: #f4c63d;
-                border-color: #f4c63d;
-            }
-            .ct-legend .ct-series-3:before {
-                background-color: #d17905;
-                border-color: #d17905;
-            }
-            .ct-legend .ct-series-4:before {
-                background-color: #453d3f;
-                border-color: #453d3f;
-            }
-            .ct-legend .ct-series-5:before {
-                background-color: #59922b;
-                border-color: #59922b;
-            }
-
-            .ct-chart-line-multipleseries .ct-legend .ct-series-0:before {
-                background-color: #d70206;
-                border-color: #d70206;
-            }
-
-            .ct-chart-line-multipleseries .ct-legend .ct-series-1:before {
-                background-color: #f4c63d;
-                border-color: #f4c63d;
-            }
-
-            .ct-chart-line-multipleseries .ct-legend li.inactive:before {
-                background: transparent;
-            }
-
-            .crazyPink li.ct-series-0:before {
-                background-color: #C2185B;
-                border-color: #C2185B;
-            }
-
-            .crazyPink li.ct-series-1:before {
-                background-color: #E91E63;
-                border-color: #E91E63;
-            }
-
-            .crazyPink li.ct-series-2:before {
-                background-color: #F06292;
-                border-color: #F06292;
-            }
-            .crazyPink li.inactive:before {
-                background-color: transparent;
-            }
-
-            .crazyPink ~ svg .ct-series-a .ct-line, .crazyPink ~ svg .ct-series-a .ct-point {
-                stroke: #C2185B;
-            }
-
-            .crazyPink ~ svg .ct-series-b .ct-line, .crazyPink ~ svg .ct-series-b .ct-point {
-                stroke: #E91E63;
-            }
-
-            .crazyPink ~ svg .ct-series-c .ct-line, .crazyPink ~ svg .ct-series-c .ct-point {
-                stroke: #F06292;
-            }
-
-            .ct-series-a .ct-line,
-            .ct-series-a .ct-point {
-                stroke: aquamarine;
-            }
+          
             /* Page styling */
 
             h1, h2{
@@ -440,31 +314,27 @@ $_POST['username'] = "Missmeva"; //CHANGE IT !!!
             </section><!-- END row -->
             <div class="hideshow2">
                 <section class="row dark" id="sec01">
-                    <div class="content">
-                        <h1 >Moisture readings</h1>
-                        <div id="legends1">
-
-                        </div>
-                        <div class="ct-chart ct-perfect-fourth" id="chart1"></div>
-                        <center><select class="form-control" id="sel1" style="width:140px; background-color: grey; color:white;">
-                            <option>Day View</option>
-                            <option>Week View</option>
-                            <option>Month View</option>
+                   <div class="content">
+                        <h1>Moisture readings</h1>
+                       <center><form action="new2.php" method="post" name="formmm" id="formmm" enctype="multipart/form-data"><input type="date" name="date1"></form></center> 
+                        <canvas id="myChart"></canvas>
+                        <center><select class="form-control" id="sel1" style="width:140px;">
+                            <option value="1" selected>Day View</option>
+                            <option value="2">Week View</option>
+                            <option value="3">Month View</option>
                             </select></center>
+
                     </div>
                 </section><!-- END row -->
 
                 <section class="row" id="sec02">
                     <div class="content">
                         <h1>Temperature readings</h1>
-                        <div id="legends2">
-
-                        </div>
-                        <div class="ct-chart ct-perfect-fourth" id="chart2" ></div>
-                        <center><select class="form-control" id="sel1" style="width:140px;">
-                            <option>Day View</option>
-                            <option>Week View</option>
-                            <option>Month View</option>
+                        
+                        <center><select class="form-control" id="sel2" style="width:140px;">
+                            <option value="1" selected>Day View</option>
+                            <option value="2">Week View</option>
+                            <option value="3">Month View</option>
                             </select></center>
 
                     </div>
@@ -473,14 +343,11 @@ $_POST['username'] = "Missmeva"; //CHANGE IT !!!
                 <section class="row dark" id="sec03">
                     <div class="content">
                         <h1>Light level</h1>
-                        <div id="legends3">
-
-                        </div>
-                        <div class="ct-chart ct-perfect-fourth" id="chart3" ></div>
-                        <center><select class="form-control" id="sel1" style="width:140px; background-color: grey; color:white;">
-                            <option>Day View</option>
-                            <option>Week View</option>
-                            <option>Month View</option>
+                        
+                        <center><select class="form-control" id="sel3" style="width:140px; background-color: grey; color:white;">
+                            <option value="1" selected>Day View</option>
+                            <option value="2">Week View</option>
+                            <option value="3">Month View</option>
                             </select></center>
                     </div>
                 </section><!-- END row -->
@@ -488,14 +355,11 @@ $_POST['username'] = "Missmeva"; //CHANGE IT !!!
                 <section class="row" id="sec04">
                     <div class="content">
                         <h1>Humidity</h1>
-                        <div id="legends4">
-
-                        </div>
-                        <div class="ct-chart ct-perfect-fourth" id="chart4" ></div>
-                        <center><select class="form-control" id="sel1" style="width:140px;">
-                            <option>Day View</option>
-                            <option>Week View</option>
-                            <option>Month View</option>
+                        
+                        <center><select class="form-control" id="sel4" style="width:140px;">
+                            <option value="1" selected>Day View</option>
+                            <option value="2">Week View</option>
+                            <option value="3">Month View</option>
                             </select></center>
                     </div>
                 </section><!-- END row -->
@@ -581,6 +445,15 @@ $_POST['username'] = "Missmeva"; //CHANGE IT !!!
                 });
             });
 
+        </script>
+        
+        
+        
+        <script>
+            
+            
+
+        
         </script>
 
         <?php include '../model/getDataMoisture.php'; ?>

@@ -1,14 +1,4 @@
-//--------------------------------------------------
 
-/*
-Cellular Shield - Pass-Through Sample Sketch
-
-In this sketch serial commands are passed from a terminal program to the SM5100B cellular module; and responses from the cellular module are posted in the terminal. More information is found in the sketch comments.
-
-
-An activated SIM card must be inserted into the SIM card holder on the board in order to use the device!
-
-*/
 #include <ESP8266WiFi.h>
 #include <ESP8266mDNS.h>
 #include <WiFiUdp.h>
@@ -23,7 +13,7 @@ An activated SIM card must be inserted into the SIM card holder on the board in 
 #include <MySQL_Cursor.h>
 
 const char* ssid     = "AndroidAP";
-const char* password = "nader123";                //!!!!!!!!!!!!!!!!!!!!!modify this
+const char* password = "nader123";                
 
 WiFiClient client;
 MySQL_Connection conn((Client *)&client);
@@ -59,7 +49,7 @@ void setup()
     Serial.println("No connect ");
   }
   server.begin();
-  while (conn.connect(server_addr, 3306, user, sqlpassword) != true) {
+  while (conn.connect(server_addr, 10000, user, sqlpassword) != true) {
       Serial.print ( " sql connect failed " );
   }
 }
@@ -168,11 +158,5 @@ void loop() {
     }
     
   }
-  //If a character is coming from the terminal to the Arduino...
-  if(Serial.available() >0)
-  {
-    incoming_char=Serial.read();  //Get the character coming from the terminal
-    cell.print(incoming_char);    //Send the character to the cellular module.
-    
-  }
+  
 }

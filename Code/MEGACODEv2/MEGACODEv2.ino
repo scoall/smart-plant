@@ -92,5 +92,5 @@ void loop() {
    // smirf.print("NAder and aScott")
   }
 
-  delay(1000);
+  delay(1800000);
 }
